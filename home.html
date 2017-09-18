@@ -1,0 +1,34 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <meta name=author content="Emily Van Laarhoven">
+  <meta name=description content="hw2 evanlaar page">
+  <meta name=keywords content="">
+  <title>cs304 hw2 page</title>
+  <link rel="stylesheet" href="">
+</head>
+<body>
+
+<h1>Welcome to the Wisdom Collection Site!</h1>
+
+<p>enrich us with your insights </p>
+
+<form id="wisdom-form" action="/~cs304/php/form-echo-html.php">
+  <p><label>Name: <input required name="name"></label></p>
+  <p><select required name="class year"></p>
+      <option value="">Class Year</option>
+      <option>2017</option>
+      <option>2018</option>
+      <option>2019</option>
+      <option>2020</option>
+      </select>
+  <p>What is the greatest piece of advice you've ever received?</p>
+  <p><textarea name="advice" rows="6" cols="30"></textarea></p>
+  <p>Can we share this wisdom with others?</p>
+  <p><input type="radio" name="shareable" value="yes" checked> Yes </p>
+  <p><input type="radio" name="shareable" value="no"> No </p>
+  <p><input type="submit"></p>
+</form>
+
+</body>
+</html>

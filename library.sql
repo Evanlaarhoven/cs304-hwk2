@@ -1,0 +1,63 @@
+-- pset partners: Emily Van Laarhoven, MR Ngo
+
+use evanlaar_db;
+
+-- patron table holds patron info - requires all values to be filled out
+drop table if exists patron;
+create table patron (
+       pid integer auto_increment primary key,
+       nm varchar(50) not null,
+       street varchar(30) not null,
+       city varchar(20) not null
+) ENGINE=InnoDB;
+
+
+-- sponsorship relationship indicates what patron sponsors what minor
+-- if patrons show up in this table, it shows that they are sponsors 
+-- or minors. References patron table necessarily
+drop table if exists sponsors;
+create table sponsors(
+       minor_id integer,
+       INDEX (minor_id),
+       foreign key (minor_id) references patron(pid) on delete cascade,
+       sponsor_id integer,
+       INDEX (sponsor_id),
+       foreign key (sponsor_id) references patron(pid) on delete restrict,
+       until date
+) ENGINE=InnoDB;
+
+-- library items: shows type, title, author/artist, and availability.
+-- assumingly, availability will be false if it is loaned out (not
+-- implemented).
+drop table if exists inventory;
+create table inventory(
+       cid integer auto_increment primary key,
+       title varchar(100),
+       author_artist varchar(100),
+       pub_date date,
+       item_type enum('book', 'CD', 'DVD', 'tape','magazine'),
+       available tinyint default 1
+) ENGINE=InnoDB;
+
+-- loan relationship indicates which items are out on loan to
+-- which patrons. We use the unique constraint on item to make
+-- sure that two patrons can't loan the same item. Both patron
+-- and item ids referenced.
+drop table if exists loan;
+create table loan(
+       borrower integer not null,
+       INDEX (borrower),
+       foreign key (borrower) references patron(pid) on delete restrict,
+       item integer unique not null,
+       INDEX (item),
+       foreign key (item) references inventory(cid) on delete restrict,
+       due_date date
+) ENGINE=InnoDB;
+
+
+
+     
+     
+     
+       
+      
